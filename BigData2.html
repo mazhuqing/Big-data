@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/BigData2.css">
+    <title>大数据图表2</title>
+    <script src="node_modules/echarts/dist/echarts.js"></script>
+</head>
+
+<body>
+    <!-- -------------------------------------Top------------------------------------------------------ -->
+    <div class="poor-one">
+        <div class="poorBox1">
+            <!-- 贫困户数 -->
+            <div class="poorNumber">
+                <div class="poorNumber1">
+                    <span>宁远县贫困人数：14948户|贫困人数：56712人</span>
+                    <a href="#">刷新</a>
+                </div>
+                <div id="main1" style=" height:398px;"></div>
+            </div>
+            <!-- 致贫原因 -->
+            <div class="poorReason">
+                <div class="poorNumber1">
+                    <span>主要贫困原因</span>
+                </div>
+                <div id="main2" style=" height:398px;"></div>
+            </div>
+            <!-- 脱贫人口 -->
+            <div class="poorPoverty">
+                <div class="poorNumber1">
+                    <span>宁远县贫困人数：17433户|脱贫人数：76229人</span>
+                    <a href="#" class="break">刷新</a>
+                </div>
+                <div id="main3" style=" height:398px;"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ------------------------------------------bottom------------------------------------------------ -->
+    <div class="poor-two">
+        <div class="poorBox2">
+            <!-- 人均纯收入 -->
+            <div class="poorIncome">
+                <div class="poorNumber1">
+                    <span>贫困户人数纯收入范围统计图</span>
+                </div>
+                <div id="main4" style=" height:400px;"></div>
+            </div>
+            <!-- 帮扶措施 -->
+            <div class="poorMeasures">
+                <div class="poorNumber1">
+                    <span>贫困户帮扶措施</span>
+                </div>
+                <div id="main5" style=" height:400px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var myChart1 = echarts.init(document.getElementById('main1'));
+        var myChart2 = echarts.init(document.getElementById('main2'));
+        var myChart3 = echarts.init(document.getElementById('main3'));
+        var myChart4 = echarts.init(document.getElementById('main4'));
+        var myChart5 = echarts.init(document.getElementById('main5'));
+
+        var option1 = {
+            backgroundColor: '#2e2e2e',
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                },
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '1%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                splitLine: { show: false },
+                axisLine: {
+                    lineStyle: {
+                        color: '#717171',
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                    interval: -10,
+                    rotate: 40,
+                    color: '#fff',
+                    fontSize: 6,
+                    color: '#e2e5ea'
+                },
+                data: ['中和镇', '五龙山乡', '文庙街道', '太平镇', '湾井镇', '桐山街道',
+                    '桐水溪乡', '天堂镇', '湾水桥镇', '棉花坪乡', '鲤溪镇', '舜陵街道',
+                    '水寺镇', '冷水镇', '仁和镇', '九疑瑶族乡', '东溪街道', '保安镇', '禾亭镇']
+            },
+            yAxis: {
+                type: 'value',
+                name: '贫困户户数(户)',
+                nameGap: '30',
+                nameLocation: 'middle',
+                nameTextStyle: {
+                    color: "#a5a5a5",
+                    fontSize: 12,
+                    padding: 10
+                },
+                min: 0,
+                max: 2000,
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                axisLabel: {
+                    formatter: function (value, index) {
+                        return value.toFixed(0)
+                    },
+                    color: '#c7c9d5'
+                },
+                splitLine: {
+                    lineStyle: {
+                        type: 'solid',
+                        color: '#717171'
+                    }
+                }
+            },
+            series: [
+
+                {
+                    name: '贫困户数',
+                    type: 'bar',
+                    itemStyle: {
+                        normal:
+                        {
+                            color: '#2d8f90',
+                            borderWidth: '1',
+                            borderColor: '#fef9ff',
+                        }
+
+                    },
+                    label: {
+                        show: true,
+                        position: 'insideTop'
+                    },
+                    data: [1433, 428, 327, 1352, 711, 300,
+                        300, 675, 711, 250, 1089, 416, 1257, 1375, 415, 953, 356, 762, 1222, 703],
+                    barGap: 10,
+                    barWidth: '10',
+                }
+            ]
+        };
+        var option2 = {
+            backgroundColor: '#38383a',
+            legend: {
+                orient: 'vertical',
+                icon: 'circle',
+                right: '1%',
+                bottom: '80%',
+                textStyle: {
+                    color: '#fff'
+                },
+                data: ['致贫户数']
+            },
+            radar: {
+                splitNumber: 3,
+                name: {
+                    textStyle: {
+                        color: '#fff',
+                        padding: [3, 5]
+                    }
+                },
+                indicator: [
+                    { name: '因学', max: 15000 },
+                    { name: '缺资金', max: 15000 },
+                    { name: '因病', max: 15000 },
+                    { name: '缺技术', max: 15000 },
+                    { name: '其他', max: 15000 },
+                    { name: '交通条件落后', max: 15000 },
+                    { name: '因残', max: 15000 },
+                    { name: '缺水', max: 15000 },
+                    { name: '因灾', max: 15000 },
+                ],
+                splitArea: {
+                    show: false,
+                    areaStyle: {
+                        color: 'rgba(255,0,0,0)', // 图表背景的颜色
+                    },
+                },
+            },
+            series: [{
+                type: 'radar',
+                symbol: 'circle',
+                areaStyle: {
+                    normal: {
+
+                    }
+                },
+                data: [
+                    {
+                        value: [7830, 7830],
+                        name: '致贫户数'
+                    },
+                ],
+                itemStyle: {
+                    normal: {
+                        color: '#2c918d',
+                        lineStyle: {
+                            color: '#2c918d',
+                        },
+                    },
+                },
+            }]
+        };
+        var option3 = {
+            backgroundColor: '#38383a',
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c}'
+            },
+            color: ['#1b989e', '#76f25c', '#ff4d4b', '#6ea0d3', '#9ff8fc', '#ff0363', '#ff4d4b', '#6ea0d3',
+                '#e3abea', '#64b93a', '#f4463d', '#6e92b6', '#a6f9fd', '#1e9291', '#98e77a', 'ff4b4f', '#6b92cd',
+                '#d2e3f7', '#ff0368', '#e7a6f8', '#4cc92f', '#ec5657'],
+            legend: {
+                orient: 'vertical',
+                right: '-20%',
+                icon: 'circle',
+                textStyle: { //图例文字的样式
+                    color: '#fff',
+                    fontSize: 12
+                },
+                data: ['中和镇', '五龙山乡', '文庙街道', '太平镇', '湾井镇', '桐山街道',
+                    '桐水溪乡', '天堂镇', '湾水桥镇', '棉花坪乡', '鲤溪镇', '舜陵街道',
+                    '水寺镇', '冷水镇', '仁和镇', '九疑瑶族乡', '东溪街道', '保安镇', '禾亭镇']
+            },
+            series: [
+                {
+                    name: '脱贫人口',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['35%', '60%'],
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                    },
+                    data: [
+                        { value: 335, name: '中和镇' },
+                        { value: 310, name: '五龙山乡' },
+                        { value: 234, name: '文庙街道' },
+                        { value: 135, name: '太平镇' },
+                        { value: 348, name: '湾井镇' },
+                        { value: 335, name: '桐山街道' },
+                        { value: 310, name: '桐水溪乡' },
+                        { value: 234, name: '湾水桥镇' },
+                        { value: 135, name: '棉花坪乡' },
+                        { value: 335, name: '鲤溪镇' },
+                        { value: 310, name: '舜陵街道' },
+                        { value: 234, name: '水寺镇' },
+                        { value: 135, name: '冷水镇' },
+                        { value: 335, name: '仁和镇' },
+                        { value: 310, name: '九疑瑶族乡' },
+                        { value: 234, name: '东溪街道' },
+                        { value: 135, name: '天堂镇' },
+                        { value: 310, name: '禾亭镇' },
+                        { value: 234, name: '东溪街道' },
+                        { value: 135, name: '保安镇' },
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        var option4 = {
+            backgroundColor: '#303030',
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '1%',
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: true,
+                axisLine: {
+                    lineStyle: {
+                        color: '#6a7579',
+                        width: 1,//这里是为了突出显示加上的
+                    }
+                },
+                axisLabel: {   // X轴线 标签修改
+                    textStyle: {
+                        color: '#dbdce0', //坐标值得具体的颜色
+                    },
+                    show: true,
+                    interval: -10,
+                    rotate: 40,
+                    color: '#fff',
+                    fontSize: 6,
+                    color: '#e2e5ea'
+                },
+                data: ['中和镇', '五龙山乡', '文庙街道', '太平镇', '湾井镇', '桐山街道',
+                    '桐水溪乡', '天堂镇', '湾水桥镇', '棉花坪乡', '鲤溪镇', '舜陵街道',
+                    '水寺镇', '冷水镇', '仁和镇', '九疑瑶族乡', '东溪街道', '保安镇', '禾亭镇']
+            },
+            yAxis: {
+                type: 'value',
+                name: '家庭人均纯收入',
+                nameGap: '30',
+                nameLocation: 'middle',
+                nameTextStyle: {
+                    color: "#a5a5a5",
+                    fontSize: 12,
+                    padding: 10
+                },
+                max: 10000,
+                interval: 2500,
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                axisLabel: {
+                    color: '#c7c9d5',
+                    splitLine: {
+                        lineStyle: {
+                            type: 'solid',
+                            color: '#716d6a'
+                        }
+                    },
+                    formatter: function (value, index) {
+                        var value;
+                        if (value >= 1000) {
+                            value = value / 1000 + 'k';
+                        } else if (value < 1000) {
+                            value = value;
+                        }
+                        return value
+                    },
+                },
+
+            },
+            series: [{
+                data: [4900, 5000, 4500, 5500, 4500, 6000, 5100, 8500, 5000, 5200, 5100, 4800, 5000, 7000, 4700, 6900, 6500, 5500, 4500,],
+                type: 'line',
+                color: '#2b5e5f',
+                symbol: "circle",
+                smooth: true,
+                areaStyle: {
+                    color: '#2b5e5f'
+                }
+            }]
+        };
+        var option5 = {
+            backgroundColor: '#303030',
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            legend: {
+                icon: 'circle',
+                bottom: '1%',
+                inactiveColor: '#5e5e60',
+                textStyle: {
+                    color: '#c7e3f9'
+                },
+                selected: {
+                    '中和镇': true,
+                    '五龙山乡': false,
+                    '文庙街道': false,
+                    '太平镇': false,
+                    '湾井镇': false,
+                    '桐山街道': false,
+                    '桐水溪乡': false,
+                    '天堂镇': false,
+                    '湾水桥镇': false,
+                    '棉花坪乡': false,
+                    '鲤溪镇': false,
+                    '舜陵街道': false,
+                    '水寺镇': false,
+                    '冷水镇': false,
+                    '仁和镇': false,
+                    '九疑瑶族乡': false,
+                    '保安镇': false,
+                    '禾亭镇': false,
+
+                },
+                data: ['中和镇', '五龙山乡', '文庙街道', '太平镇', '湾井镇', '桐山街道',
+                    '桐水溪乡', '天堂镇', '湾水桥镇', '棉花坪乡', '鲤溪镇', '舜陵街道',
+                    '水寺镇', '冷水镇', '仁和镇', '九疑瑶族乡', '保安镇', '禾亭镇']
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '25%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    type: 'category',
+                    boundaryGap: true,
+                    axisLine: {
+                        lineStyle: {
+                            color: '#6a7579',
+                            width: 1,//这里是为了突出显示加上的
+                        }
+                    },
+                    axisLabel: {   // X轴线 标签修改
+                        textStyle: {
+                            color: '#dbdce0', //坐标值得具体的颜色
+                        },
+                        show: true,
+                        interval: -10,
+                        rotate: 0,
+                        color: '#fff',
+                        fontSize: 12,
+                        color: '#e2e5ea'
+                    },
+                    data: ['房屋改造', '富民产业', '医疗救助', '社会兜底', '惠农政策', '饮水安全',
+                        '教育助学', '专项扶贫', '劳动力培训', '金融扶贫', '异地搬迁']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '户数',
+                    nameGap: '20',
+                    nameLocation: 'middle',
+                    nameTextStyle: {
+                        color: "#a5a5a5",
+                        fontSize: 12,
+                        padding: 10
+                    },
+                    min: '0',
+                    max: '300',
+                    axisTick: { //y轴刻度线
+                        show: false
+                    },
+                    axisLine: { //y轴
+                        show: false
+                    },
+                    axisLabel: {
+                        color: '#c7c9d5',
+                        splitLine: {
+                            lineStyle: {
+                                type: 'solid',
+                                color: '#716d6a'
+                            }
+                        },
+                    },
+                }],
+            series: [
+                {
+                    name: '中和镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#2b5e5f',
+                    areaStyle: {
+                        color: '#2b5e5f'
+                    },
+                    data: [0, 40, 20, 48, 1, 150, 110, 0, 0, 249, 60]
+                },
+                {
+                    name: '五龙山乡',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#74e464',
+                    areaStyle: {
+                        color: '#74e464'
+                    },
+                    data: [10, 225, 246, 226, 178, 189, 220, 99, 256, 123, 234]
+                },
+                {
+                    name: '文庙街道',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#ff6155',
+                    areaStyle: {
+                        color: '#ff6155'
+                    },
+                    data: [15, 32, 21, 54, 190, 230, 10, 67, 124, 245, 233]
+                },
+                {
+                    name: '太平镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#7c9abc',
+                    areaStyle: {
+                        color: '#7c9abc'
+                    },
+                    data: [32, 32, 231, 156, 90, 220, 120, 215, 189, 290, 34]
+                },
+                {
+                    name: '湾井镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#edaaef',
+                    areaStyle: {
+                        color: '#edaaef'
+                    },
+                    data: [207, 282, 201, 134, 290, 130, 220, 245, 223, 167, 189]
+                },
+                {
+                    name: '桐山街道',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#efaab',
+                    areaStyle: {
+                        color: '#efaab'
+                    },
+                    data: [10, 40, 220, 48, 123, 150, 110, 110, 108, 249, 160]
+                },
+                {
+                    name: '桐水溪乡',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#efaaca',
+                    areaStyle: {
+                        color: '#efaaca'
+                    },
+                    data: [0, 25, 46, 26, 78, 89, 70, 99, 256, 123, 234]
+                },
+                {
+                    name: '天堂镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#d7aaef',
+                    areaStyle: {
+                        color: '#d7aaef'
+                    },
+                    data: [15, 32, 21, 54, 190, 230, 10, 67, 124, 245, 233]
+                },
+                {
+                    name: '湾水桥镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#aab9ef',
+                    areaStyle: {
+                        color: '#aab9ef'
+                    },
+                    data: [32, 32, 231, 156, 90, 220, 120, 215, 189, 290, 34]
+                },
+                {
+                    name: '棉花坪乡',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#b9efaa',
+                    areaStyle: {
+                        color: '#b9efaa'
+                    },
+                    data: [207, 22, 201, 34, 90, 130, 220, 245, 23, 67, 189]
+                },
+
+                {
+                    name: '鲤溪镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#efd4aa',
+                    areaStyle: {
+                        color: '#efd4aa'
+                    },
+                    data: [120, 240, 120, 248, 156, 150, 10, 140, 120, 249, 160]
+                },
+                {
+                    name: '舜陵街道',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#aaefb2',
+                    areaStyle: {
+                        color: '#aaefb2'
+                    },
+                    data: [145, 232, 121, 154, 190, 30, 170, 167, 124, 25, 33]
+                },
+                {
+                    name: '水寺镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#aab4ef',
+                    areaStyle: {
+                        color: '#aab4ef'
+                    },
+                    data: [132, 232, 231, 156, 190, 220, 120, 15, 189, 90, 134]
+                },
+                {
+                    name: '冷水镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#aae8ef',
+                    areaStyle: {
+                        color: '#aae8ef'
+                    },
+                    data: [207, 282, 201, 134, 290, 130, 220, 245, 233, 167, 189]
+                },
+                {
+                    name: '仁和镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#c9efaa',
+                    areaStyle: {
+                        color: '#c9efaa'
+                    },
+                    data: [120, 240, 220, 148, 121, 150, 110, 20, 230, 249, 260]
+                },
+                {
+                    name: '九疑瑶族乡',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#edefaa',
+                    areaStyle: {
+                        color: '#edefaa'
+                    },
+                    data: [230, 265, 246, 126, 178, 189, 170, 199, 256, 123, 234]
+                },
+                {
+                    name: '保安镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#aaefe9',
+                    areaStyle: {
+                        color: '#aaefe9'
+                    },
+                    data: [300, 245, 46, 276, 78, 89, 170, 299, 56, 13, 34]
+                },
+                {
+                    name: '禾亭镇',
+                    type: 'line',
+                    symbol: "circle",
+                    smooth: true,
+                    color: '#edaaef',
+                    areaStyle: {
+                        color: '#edaaef'
+                    },
+                    data: [115, 132, 121, 154, 190, 230, 110, 67, 24, 45, 33]
+                },
+            ]
+        };
+
+
+
+        myChart1.setOption(option1);
+        myChart2.setOption(option2);
+        myChart3.setOption(option3);
+        myChart4.setOption(option4);
+        myChart5.setOption(option5);
+        window.addEventListener('resize', function () {
+            myChart1.resize();
+            myChart2.resize();
+            myChart3.resize();
+            myChart4.resize();
+            myChart5.resize();
+        });
+    </script>
+</body>
+
+</html>

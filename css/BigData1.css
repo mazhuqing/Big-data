@@ -1,0 +1,117 @@
+body,p,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,hr,td,input,textarea{
+	margin:0;
+	padding:0;
+}
+ul,ol{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+img{
+	border:0;
+}
+body{
+    font-family: "微软雅黑";
+    background-image: url(../image/view.jpg); 
+    background-size:cover;
+}
+
+/* ------------------------------------------头部---------------------------------------------------------------- */
+header{
+    width: 100%;
+    height:40px ;
+    margin-bottom: 20px;
+}
+.h-trade{
+    color: #fff;
+    font-weight: bolder;
+    font-size: 22px;
+    text-align: center;
+    width: 488px;
+    height: 36px;
+    margin: 15px auto;
+    border-top:1px solid #047fe9;
+    border-bottom:1px solid #047fe9;
+    
+}
+.tradeLine{
+    width: 250px;
+    border: 2px solid #008ef9;
+    margin: 3px auto;
+    border-radius: 5px;
+}
+
+/* ---------------------------------------------大数据图表内容---------------------------------------------- */
+
+.content{
+    width:97%;
+    height: 622px;
+    /* background-color: chartreuse; */
+    margin: 0 20px 0 15px;
+}
+
+    /* 左边工业累计总产值 */
+.c-industry{
+    width: 35%;
+    height:250px ;
+    border: 1px solid #017de1;
+    padding: 20px;
+    float: left;
+}
+    /* right现价与可比价 */
+.c-price{
+    width: 57%;
+    height: 270px;
+    border: 1px solid #017de1;
+    margin: 0 0 0 502px;
+    padding: 10px;
+}
+.priceOne{
+    width: 82px;
+    height: 32px;
+    border: 1px solid #0865b3;
+    margin-top: 10px;
+    color: #fff;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 32px;
+    float: left;
+}
+.priceTwo{
+    width: 86px;
+    height: 34px;
+    background-color: #13459a;
+    margin: 10px 0 0 100px;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 32px;
+    color: #fff;
+}
+.priceThree{
+    margin: -20px 0 30px 0;
+    text-align: center;
+    color: #fff;
+}
+.priceFour{
+    width: 35px;
+    height: 10px;
+    background-color: #e72122;
+    margin: -20px 0 0px 550px;
+    float: left;
+}
+.priceFive{
+    width: 105px;
+    margin: -25px 0 10px 593px;
+    font-size: 12px;
+    color: #fff;
+}
+
+    /* bottom各行工业增加值 */
+.c-add{
+    width: 98%;
+    height: 290px;
+    border: 1px solid #017de1;
+    margin: 20px 0 0 0px;
+    padding: 10px;
+}

@@ -1,0 +1,92 @@
+body,p,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,hr,td,input,textarea{
+	margin:0;
+	padding:0;
+}
+ul,ol{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+img{
+	border:0;
+}
+body{
+    font-family: "微软雅黑";
+}
+
+/* ---------------------------------------------------Top----------------------------------------------- */
+.poor-one{
+    height:432px ;  
+}
+.poorBox1{
+    width: 1263px;
+    height: 432px;
+    /* background-color: aquamarine; */
+    overflow: hidden;
+}
+    /* 贫困户数 */
+.poorNumber{
+    width: 28%;
+    height: 432px;
+    float: left;
+}
+.poorNumber1{
+    height:28px ;
+    background-color: #609da0;
+    padding: 0 10px;
+    margin-bottom: 5px;
+}
+span{
+    color: #f2f9ff;
+    font-size: 12px;
+    line-height: 28px;
+}
+a{
+    color: #000814;
+    font-size: 12px;
+    line-height: 28px;
+    margin-left: 50px;
+    font-weight: 600;
+}
+    /* 致贫原因 */
+.poorReason{
+    width: 41%;
+    height: 432px;
+    /* background-color: blue; */
+    margin-left: 5px;
+    float: left;
+}
+    /* 脱贫人口 */
+.poorPoverty{
+    width: 31%;
+    height: 432px;
+    /* background-color: yellow; */
+    margin-left: 882px;
+}
+.break{
+    margin-left: 82px;
+}
+
+/* --------------------------------------------------bottom-------------------------------------------- */
+.poor-two{
+    height:388px ; 
+}
+.poorBox2{
+    width: 1263px;
+    height: 432px;
+    /* background-color: pink; */
+    margin-top: 2px;
+    overflow: hidden;
+}
+.poorIncome{
+    width: 49.5%;
+    height: 432px;
+    float: left;
+}
+.poorMeasures{
+    width: 50%;
+    height: 432px;
+    margin-left: 632px;
+   
+}

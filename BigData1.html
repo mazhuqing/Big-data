@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/BigData1.css">
+    <title>大数据图表1</title>
+    <script src="node_modules/echarts/dist/echarts.js"></script>
+</head>
+
+<body>
+    <!--------------------------------- -----------头部 --------------------------------------------------------->
+    <header>
+        <div class="h-trade">行业分析
+            <div class="tradeLine"></div>
+        </div>
+    </header>
+
+    <!-- --------------------------------------数据图表内容----------------------------------------------------- -->
+    <div class="content">
+        <!-- left工业累计总产值 -->
+        <div class="c-industry">
+            <div id="main1" style="height:250px;"></div>
+        </div>
+        <!-- right现价与可比价 -->
+        <div class="c-price">
+            <div class="priceOne">现价</div>
+            <div class="priceTwo">可比价</div>
+            <div class="priceThree">201706月累计同比增长</div>
+            <div class="priceFour"></div>
+            <div class="priceFive">累计同比增长(现价)</div>
+            <div id="main2" style="height:195px;"></div>
+        </div>
+        <!-- bottom各行工业增加值 -->
+        <div class="c-add">
+            <div class="priceOne">现价</div>
+            <div class="priceTwo">可比价</div>
+            <div class="priceThree">各行业工业增加值增速</div>
+            <div id="main3" style="height:215px;"></div>
+        </div>
+    </div>
+
+    <script>
+        var myChart1 = echarts.init(document.getElementById('main1'));
+        var myChart2 = echarts.init(document.getElementById('main2'));
+        var myChart3 = echarts.init(document.getElementById('main3'));
+        var option1 = {
+            title: {
+                text: '2017年6月工业累计总产值行业占比(%)',
+                left: 'center',
+                textStyle: {
+                    color: '#fff',
+                    fontWeight: 'normal'
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                icon: "rect ",
+                right: 'right',
+                y: 'center',
+                itemWidth: 10,
+                itemHeight: 10,
+                textStyle: { //图例文字的样式
+                    color: ['#0591ff', '#ff2112', '#d4d909', '#02c2b3', '#ff5b05', '#00b801', '#d3a95d', '#de00fa', '2154ee'],
+                },
+                data: ['电子通信设备', '汽车', '化学', '石油核燃料', '电力热力', '食品饮料', '金属', '电气机械', '其他']
+            },
+            color: ['#0591ff', '#ff2112', '#d4d909', '#02c2b3', '#ff5b05', '#00b801', '#d3a95d', '#de00fa', '2154ee'],
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '80%',
+                    center: ['40%', '50%'],
+                    label: {
+                        normal: {
+                            position: 'inner',
+                            formatter: "{c}"
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: [
+                        { value: 24.69, name: '电子通信设备' },
+                        { value: 21.26, name: '汽车' },
+                        { value: 12.36, name: '化学' },
+                        { value: 7.3, name: '石油核燃料' },
+                        { value: 8.8, name: '电力热力' },
+                        { value: 6.05, name: '食品饮料' },
+                        { value: 4.07, name: '金属' },
+                        { value: 2.57, name: '电气机械' },
+                        { value: 12.92, name: '其他' },
+
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        var option2 = {
+            backgroundColor: '#083286',
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                top: 20,
+                bottom: 60,
+                x: 60,
+                x2: 30,
+                y2: 80
+            },
+            xAxis: {
+                type: 'category',
+                axisLine: { show: true },
+                axisLabel: {  
+                    show: true, 
+                    interval:-10,
+                    rotate:40,
+                    color:'#fff',
+                    fontSize:6 },
+                    axisLine:{
+                        lineStyle:{
+                            color:'#fff',
+                            width:1,//这里是为了突出显示加上的
+            }
+        } ,
+                axisTick: { show: false },
+                splitLine: { show: false },
+                data: ['电子及通信设备制造业', '汽车制造业', '化学源料及化学制品', '石油加工炼焦核燃料加工', '电力、热力生产和供应业', '食品饮料制造业', '金属冶炼及加工', '电气机械及燃料制造业']
+
+            },
+            yAxis: {
+                type: 'value',
+                position: 'left',
+                min: -40.00,
+                max: 40.00,
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                axisLabel: {
+                    formatter: function (value, index) {
+                        return value.toFixed(2)
+                    },
+                    color: '#fff'
+                },
+                splitLine: {
+                    lineStyle: {
+                        type: 'solid',
+                        color: '#0636a2'
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '累计同比增长(现价)',
+                    type: 'bar',
+                    barWidth: 15,
+                    stack: '总量',
+                    label: {
+                        show: false,
+                    },
+                    data: [
+                        { value: -20 },
+                        { value: 20 },
+                        { value: -15 },
+                        { value: 22 },
+                        { value: -10 },
+                        { value: -10 },
+                        { value: -20 },
+                    ]
+                }
+            ]
+        };
+        
+        var option3 = {
+    backgroundColor: '#083286',
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend:{
+        x:'450',
+        y:'160',
+        textStyle:{
+                    color:'#fff'
+                },
+
+         data: ['电子及通信设备制造业', '汽车制造业', '化学源料及化学制品', '石油加工炼焦核燃料加工', '电力、热力生产和供应业', '食品饮料制造业', '金属冶炼及加工', '电气机械及燃料制造业']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        top:'10%',
+        bottom: '30%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: true,
+         axisLabel: {  
+                    show: true, 
+                    color:'#fff',
+                    fontSize:12 },
+        axisTick: { show: false },
+        axisLine:{
+                        lineStyle:{
+                            color:'#0636a2',
+                            width:1,//这里是为了突出显示加上的
+            }
+        } ,
+        data: ['201702', '201703', '201704', '201705', '201706']
+    },
+    yAxis: {
+        type: 'value',
+         min: -40,
+        max: 80,
+         axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                axisLabel: {
+                    formatter: function (value, index) {
+                        return value.toFixed(2)
+                    },
+                    color: '#fff'
+                },
+                splitLine: {
+                    lineStyle: {
+                        type: 'solid',
+                        color: '#0636a2'
+                    }
+                }
+    },
+    series: [
+        {
+            name: '电子及通信设备制造业',
+            type: 'line',
+             symbol: 'circle', 
+            color:'#d1a661',
+            data: [-19, -20, -20, -25, -30]
+        },
+        {
+            name: '汽车制造业',
+            type: 'line',
+             symbol: 'circle', 
+            color:'#d3db00',
+            data: [30, 25, 25, 26, 27]
+        },
+        {
+            name: '化学源料及化学制品',
+            type: 'line',
+             symbol: 'circle', 
+            smooth: true,
+              color:'#fe6309',
+            data: [50, 30, 24, 25, 26]
+        },
+        {
+            name: '石油加工炼焦核燃料加工',
+            type: 'line',
+             symbol: 'circle', 
+            smooth: true,
+            color:'#009ffb',
+            data: [62, 42, 40, 38, 36]
+        },
+        {
+            name: '电力、热力生产和供应业',
+            type: 'line',
+             symbol: 'circle', 
+            smooth: true,
+             color:'#e200fc',
+            data: [-30, -22, -20, -15, -20]
+        },
+         {
+            name: '食品饮料制造业',
+            type: 'line',
+             symbol: 'circle', 
+            smooth: true,
+              color:'#00cf07',
+            data: [-10, -19, -21, -15, -20]
+        },
+        {
+            name: '金属冶炼及加工',
+            type: 'line',
+             symbol: 'circle', 
+            smooth: true,
+              color:'#00cec1',
+            data: [19, 0, -5, -15, -19]
+        },
+        {
+            name: '电气机械及燃料制造业',
+            type: 'line',
+            symbol: 'circle', 
+            smooth: true,
+            color:'#ef2322',
+            data: [50, 40, 22, 24, 30]
+        },
+    ],
+};
+        
+        myChart1.setOption(option1);
+        myChart2.setOption(option2);
+        myChart3.setOption(option3);
+        window.addEventListener('resize', function () {
+            myChart1.resize();
+            myChart2.resize();
+            myChart3.resize();
+
+        });
+    </script>
+</body>
+
+</html>
